@@ -12,11 +12,11 @@ st.set_page_config(layout="wide")
 
 # Get current session
 session = get_active_session()
-'''
-Load and Transform Data:
-In the below code snippet, we're leveraging several Snowpark DataFrame functions to load and transform data. 
-For example, filter(), group_by(), agg(), sum(), alias() and isin().
-'''
+
+# Load and Transform Data:
+# In the below code snippet, we're leveraging several Snowpark DataFrame functions to load and transform data. 
+# For example, filter(), group_by(), agg(), sum(), alias() and isin().
+
 @st.cache_data()
 def load_data():
     # Load and transform daily stock price data.
@@ -48,15 +48,14 @@ def load_data():
 # Load and cache data
 df_stocks, df_fx = load_data()
 
-'''
-Daily Stock Performance on the Nasdaq by Company
-Now add the following Python function that displays daily stock performance. Create selection dropdowns for date, 
-stock ticker, and metric to be visualized.
+# Daily Stock Performance on the Nasdaq by Company
+# Now add the following Python function that displays daily stock performance. Create selection dropdowns for date, 
+# stock ticker, and metric to be visualized.
 
-In the below code snippet, a line chart is constructed which takes a dataframe as one of the parameters. In our 
-case, that is a subset of the df_stocks dataframe filtered by ticker, date, and metric using Streamlit's built in 
-components. This enhances the customizability of the visualization.
-'''
+# In the below code snippet, a line chart is constructed which takes a dataframe as one of the parameters. In our 
+# case, that is a subset of the df_stocks dataframe filtered by ticker, date, and metric using Streamlit's built in 
+# components. This enhances the customizability of the visualization.
+
 def stock_prices():
     st.subheader('Stock Performance on the Nasdaq for the Magnificent 7')
     
@@ -93,17 +92,15 @@ def stock_prices():
     ).interactive()
     st.altair_chart(line_chart, use_container_width=True)
 
+# EUR Exchange (FX) Rates by Quote Currency:
 
-'''
-EUR Exchange (FX) Rates by Quote Currency:
+# Next, add the following Python function that displays a currency selection dropdown and a chart to visualize euro 
+# exchange rates over time for the selected quote currencies.
 
-Next, add the following Python function that displays a currency selection dropdown and a chart to visualize euro 
-exchange rates over time for the selected quote currencies.
+# In the below code snippet, a line chart is constructed which takes a dataframe as one of the parameters. In our 
+# case, that is a subset of the df_fx dataframe filtered by the currencies selected via Streamlit's multiselect() 
+# user input component.
 
-In the below code snippet, a line chart is constructed which takes a dataframe as one of the parameters. In our 
-case, that is a subset of the df_fx dataframe filtered by the currencies selected via Streamlit's multiselect() 
-user input component.
-'''
 def fx_rates():
     st.subheader('EUR Exchange (FX) Rates by Currency Over Time')
 
@@ -127,11 +124,10 @@ def fx_rates():
         )
         st.altair_chart(line_chart, use_container_width=True)
 
-'''
-Application Components:
-Add the following code snippet to display application header, create a sidebar, and map stock_prices() and 
-fx_rates() functions to Daily Stock Performance Data and Exchange (FX) Rates options respectively in the sidebar.
-'''
+# Application Components:
+# Add the following code snippet to display application header, create a sidebar, and map stock_prices() and 
+# fx_rates() functions to Daily Stock Performance Data and Exchange (FX) Rates options respectively in the sidebar.
+
 # Display header
 st.header("Cybersyn: Financial & Economic Essentials")
 
